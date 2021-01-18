@@ -2,6 +2,7 @@ package jwt
 
 import (
 	"encoding/base64"
+	"encoding/json"
 )
 
 //easyjson:json
@@ -32,4 +33,23 @@ func (c *Claims) Decode(data []byte) error {
 	}
 
 	return c.UnmarshalJSON(dst)
+}
+
+func encodeCustomClaims(v interface{}) (string, error) {
+	marshaled, err := json.Marshal(v)
+	if err != nil {
+		return "", err
+	}
+
+	return base64.RawURLEncoding.EncodeToString(marshaled), nil
+}
+
+func decodeCustomClaims(data []byte, v interface{}) error {
+	dst := make([]byte, base64.RawURLEncoding.DecodedLen(len(data)))
+	_, err := base64.RawURLEncoding.Decode(dst, data)
+	if err != nil {
+		return err
+	}
+
+	return json.Unmarshal(dst, v)
 }
