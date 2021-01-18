@@ -3,8 +3,6 @@ package jwt
 import (
 	"bytes"
 	"crypto/hmac"
-	"crypto/sha256"
-	"crypto/sha512"
 	"encoding/base64"
 	"time"
 )

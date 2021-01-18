@@ -1,6 +1,10 @@
 package jwt
 
-import "hash"
+import (
+	"crypto/sha256"
+	"crypto/sha512"
+	"hash"
+)
 
 type Algorithm struct {
 	Name string
