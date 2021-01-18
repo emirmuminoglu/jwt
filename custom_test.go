@@ -22,8 +22,6 @@ func Test_NewHS256Custom(t *testing.T) {
 		t.Error(err)
 	}
 
-	println(string(token))
-
 	if string(token) != expected {
 		t.Fail()
 	}
@@ -49,6 +47,7 @@ func Test_ParseHS256Custom(t *testing.T) {
 	})
 
 	if err != nil || claims.Subject != "1234567890" || claims.IssuedAt != 1516239022 {
+		t.Log("wrong claims or failed to parse")
 		t.Fail()
 	}
 
@@ -58,6 +57,7 @@ func Test_ParseHS256Custom(t *testing.T) {
 		})
 
 		if err == nil {
+			t.Log("malformed token didn't give any errors")
 			t.Fail()
 		}
 	}
