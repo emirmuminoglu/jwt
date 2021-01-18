@@ -35,6 +35,22 @@ func (c *Claims) Decode(data []byte) error {
 	return c.UnmarshalJSON(dst)
 }
 
+func (c *Claims) CheckIss(check string) bool {
+	return c.Issuer == check
+}
+
+func (c *Claims) CheckExp(check int64) bool {
+	return c.ExpiresAt < check
+}
+
+func (c *Claims) CheckNbf(check int64) bool {
+	return c.NotBefore > check
+}
+
+func (c *Claims) CheckAud(check string) bool {
+	return c.Audience == check
+}
+
 func encodeCustomClaims(v interface{}) (string, error) {
 	marshaled, err := json.Marshal(v)
 	if err != nil {
