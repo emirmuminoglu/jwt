@@ -14,6 +14,7 @@ func Test_NewHS256(t *testing.T) {
 	token, err := NewHS256(key, claims)
 	if err != nil {
 		t.Error(err)
+		t.Fail()
 	}
 
 	if string(token) != expected {

@@ -32,7 +32,7 @@ func (h *Header) Decode(data []byte) error {
 
 var (
 	headerPool sync.Pool
-	zeroHeader = &Header{}
+	zeroHeader = &Header{Type: "JWT"}
 )
 
 func acquireHeader() *Header {
